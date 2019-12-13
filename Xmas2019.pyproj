@@ -43,6 +43,7 @@
     <Folder Include="Xmas2019\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FolderProfile.pubxml" />
     <Content Include="requirements.txt" />
     <Content Include="Xmas2019\static\content\materialize.min.css" />
     <Content Include="Xmas2019\static\content\site.css" />
