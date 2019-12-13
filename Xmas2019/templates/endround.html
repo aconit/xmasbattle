@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+ = qlausresult,
+        yourresult=yourresult,
+        qlausscore=qlausscore,
+        yourscore=yourscore
+<div class="valign-wrapper" style="position:absolute;width:100%;height:100%;">
+    <div class="container" style="color:white">
+        <div class="row">
+            <div class="col s12 center-align" style="color:#66BB6A">
+                <div id='secamount'>Max loading: {{maxweight}} kg</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col  s6 center-align">
+                <img src="/static/images/sleigh.png" style="width:80%" /><br />
+                Your sleigh:<span id="yourresult"> {{yourresult}} kg</span>
+            </div>
+            <div class="col s6 center-align">
+                <img src="/static/images/sleighQ.png" style="width:80%" /><br />
+                Santa Qlaus' sleigh:<span id="qlausresult">  {{qlausresult}} kg</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align" style="font-size:large">
+                Score
+            </div>
+        </div>
+        <div class="row">
+            <div class="col  s6 center-align">
+                You:<br />
+                {{yourscore}}
+            </div>
+            <div class="col s6 center-align">
+                Santa Qlaus:<br />
+                {{ qlausscore}}
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="/static/scripts/three.min.js"></script>
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+
+        if ({{ yourresult }} > {{maxweight}})
+    {
+            $("#yourresult").attr("style", "color:red");
+        }
+
+        if ({{ qlausresult }} > {{ maxweight }})
+    {
+            $("#qlausresult").attr("style", "color:red");
+        }
+
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        var listener = new THREE.AudioListener();
+        camera.add(listener);
+
+        // create a global audio source
+        var sound = new THREE.Audio(listener);
+        var soundnumber = Math.floor(Math.random() * 3) + 1;
+        // load a sound and set it as the Audio object's buffer
+        var audioLoader = new THREE.AudioLoader();
+        audioLoader.load('/static/sounds/levelup.ogg', function (buffer) {
+            sound.setBuffer(buffer);
+            sound.setLoop(false);
+            sound.setVolume(0.5);
+            sound.play();
+        });
+
+    });
+
+    var roundnumber = {{ roundnumber }};
+    roundnumber++;
+    setTimeout(function () {
+        location.href = "/playround?round=" + roundnumber;
+    },
+        4000);
+
+    </script>
+
+    {% endblock %}

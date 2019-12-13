@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>602ec13c-28c3-441e-9dfb-1569ef60793b</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>runserver.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+    <Name>Xmas2019</Name>
+    <RootNamespace>Xmas2019</RootNamespace>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="runserver.py" />
+    <Compile Include="Xmas2019\__init__.py" />
+    <Compile Include="Xmas2019\views.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Xmas2019\" />
+    <Folder Include="Xmas2019\static\" />
+    <Folder Include="Xmas2019\static\content\" />
+    <Folder Include="Xmas2019\static\fonts\" />
+    <Folder Include="Xmas2019\static\images\" />
+    <Folder Include="Xmas2019\static\sounds\" />
+    <Folder Include="Xmas2019\static\scripts\" />
+    <Folder Include="Xmas2019\templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="requirements.txt" />
+    <Content Include="Xmas2019\static\content\materialize.min.css" />
+    <Content Include="Xmas2019\static\content\site.css" />
+    <Content Include="Xmas2019\static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Xmas2019\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Xmas2019\static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Xmas2019\static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Xmas2019\static\images\favicon.ico" />
+    <Content Include="Xmas2019\static\images\Gift1.png" />
+    <Content Include="Xmas2019\static\images\Gift10.png" />
+    <Content Include="Xmas2019\static\images\Gift11.png" />
+    <Content Include="Xmas2019\static\images\Gift12.png" />
+    <Content Include="Xmas2019\static\images\Gift2.png" />
+    <Content Include="Xmas2019\static\images\Gift3.png" />
+    <Content Include="Xmas2019\static\images\Gift4.png" />
+    <Content Include="Xmas2019\static\images\Gift5.png" />
+    <Content Include="Xmas2019\static\images\Gift6.png" />
+    <Content Include="Xmas2019\static\images\Gift7.png" />
+    <Content Include="Xmas2019\static\images\Gift8.png" />
+    <Content Include="Xmas2019\static\images\Gift9.png" />
+    <Content Include="Xmas2019\static\images\roundexample.png" />
+    <Content Include="Xmas2019\static\images\roundinfo.png" />
+    <Content Include="Xmas2019\static\images\santaLeft.png" />
+    <Content Include="Xmas2019\static\images\santaRight.png" />
+    <Content Include="Xmas2019\static\images\santa_attackLeft.png" />
+    <Content Include="Xmas2019\static\images\santa_attackRight.png" />
+    <Content Include="Xmas2019\static\images\santa_hitLeft.png" />
+    <Content Include="Xmas2019\static\images\santa_hitRight.png" />
+    <Content Include="Xmas2019\static\images\Sleigh.png" />
+    <Content Include="Xmas2019\static\images\SleighQ.png" />
+    <Content Include="Xmas2019\static\images\Xmasbattle.png" />
+    <Content Include="Xmas2019\static\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Xmas2019\static\scripts\jquery-1.10.2.js" />
+    <Content Include="Xmas2019\static\scripts\jquery-1.10.2.min.js" />
+    <Content Include="Xmas2019\static\scripts\jquery-1.10.2.min.map" />
+    <Content Include="Xmas2019\static\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Xmas2019\static\scripts\jquery.validate.js" />
+    <Content Include="Xmas2019\static\scripts\jquery.validate.min.js" />
+    <Content Include="Xmas2019\static\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Xmas2019\static\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Xmas2019\static\scripts\materialize.min.js" />
+    <Content Include="Xmas2019\static\scripts\respond.js" />
+    <Content Include="Xmas2019\static\scripts\respond.min.js" />
+    <Content Include="Xmas2019\static\scripts\three.min.js" />
+    <Content Include="Xmas2019\static\scripts\_references.js" />
+    <Content Include="Xmas2019\static\sounds\bells.ogg" />
+    <Content Include="Xmas2019\static\sounds\levelup.ogg" />
+    <Content Include="Xmas2019\static\sounds\sound1.ogg" />
+    <Content Include="Xmas2019\static\sounds\sound2.ogg" />
+    <Content Include="Xmas2019\static\sounds\sound3.ogg" />
+    <Content Include="Xmas2019\static\sounds\timeup.ogg" />
+    <Content Include="Xmas2019\templates\index.html" />
+    <Content Include="Xmas2019\templates\howtoplay.html" />
+    <Content Include="Xmas2019\templates\endround.html" />
+    <Content Include="Xmas2019\templates\gameover.html" />
+    <Content Include="Xmas2019\templates\qlaus.html" />
+    <Content Include="Xmas2019\templates\play.html" />
+    <Content Include="Xmas2019\templates\playround.html" />
+    <Content Include="Xmas2019\templates\gameindex.html" />
+    <Content Include="Xmas2019\templates\layout.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.7</Version>
+      <Description>env (Python 3.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

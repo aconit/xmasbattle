@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container" style="color:white; text-align:justify">
+    <div class="row">
+        <div class="col s12" style="color:#66BB6A; font-size:large">
+            <p>How to play</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p>In this game you need to solve the ultimate logistics problem Santa faces every year: load the sleigh with as many gifts as possible for one ride.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p>You compete against Santa Qlaus - the quantum version of Santa. But don't worry. His quantum algorithm is not perfect yet, so you have enough chances to win the battle.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p>
+                The game consists of 5 rounds. Each round starts with some information:<br />
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 center-align">
+            <img src="/static/images/roundinfo.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p>- The <span style="color:#66BB6A"> amount of gifts </span> shows from how many gifts you'll have to choose.</p>
+            <p>- <span style="color:#66BB6A">Max loading</span> is the maximum weight your sleigh can carry in this round. If the sum of weights of the chosen gifts exceeds the max loading weight, you lose the round.</p>
+            <p>- <span style="color:#66BB6A">Time</span> shows the amount of seconds you have to make your choice. When the time is up you won't be able to change your choice.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p>Choose gifts by simply checking the checkbox. The label of the chosen gift turns white.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 center-align">
+            <img src="/static/images/roundexample.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p>The user (you or Santa Qlaus) with the highest sum of weights of the chosen gifts, but less than the max loading weight of the sleigh, wins the round. The game is over after 5 rounds.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 center-align" style="color:#66BB6A; font-size:large">
+            Enjoy!
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 center-align">
+            <a href="/playround?" class="waves-effect waves-light btn green lighten-1">Play</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <p>This game uses <a href="https://qiskit.org/" target="_blank"> Qiskit van IBM</a>.</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

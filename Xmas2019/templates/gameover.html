@@ -1,0 +1,212 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="valign-wrapper" style="position:absolute;width:100%;height:100%;color:white">
+    <div class="row">
+        <div class="col s12" style="height:600px;width:400px;">
+            <div class="row" style="height:450px;">
+                <div class="col s12"> </div>
+            </div>
+            <div class="row">
+                <div class="col s12 center-align">
+                    SCORE
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col s6 center-align">
+                        You
+                    </div>
+                    <div class="col s6 center-align">
+                        Santa Qlaus
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6 center-align">
+                        {{yourscore}}
+                    </div>
+                    <div class="col s6 center-align">
+                        {{qlausscore}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 center-align">
+                    <a href="/playround?" class="waves-effect waves-light btn green lighten-1" style="width:100%">Play again</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/static/scripts/three.min.js"></script>
+<script src="/static/scripts/jquery-1.10.2.js"></script>
+<script>
+
+    function TextureAnimator(texture, tilesHoriz, tilesVert, numTiles, tileDispDuration) {
+        // note: texture passed by reference, will be updated by the update function.
+
+        this.tilesHorizontal = tilesHoriz;
+        this.tilesVertical = tilesVert;
+        // how many images does this spritesheet contain?
+        //  usually equals tilesHoriz * tilesVert, but not necessarily,
+        //  if there at blank tiles at the bottom of the spritesheet.
+        this.numberOfTiles = numTiles;
+        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(1 / this.tilesHorizontal, 1 / this.tilesVertical);
+
+        // how long should each image be displayed?
+        this.tileDisplayDuration = tileDispDuration;
+
+        // how long has the current image been displayed?
+        this.currentDisplayTime = 0;
+
+        // which image is currently being displayed?
+        this.currentTile = 0;
+
+        this.update = function (milliSec) {
+            this.currentDisplayTime += milliSec;
+            while (this.currentDisplayTime > this.tileDisplayDuration) {
+                this.currentDisplayTime -= this.tileDisplayDuration;
+                this.currentTile++;
+                if (this.currentTile == this.numberOfTiles)
+                    this.currentTile = 0;
+                var currentColumn = this.currentTile % this.tilesHorizontal;
+                texture.offset.x = currentColumn / this.tilesHorizontal;
+                var currentRow = Math.floor(this.currentTile / this.tilesHorizontal);
+                texture.offset.y = currentRow / this.tilesVertical;
+            }
+        };
+    }
+
+
+    var yourresult = {{ yourscore}};
+    var qlausresult = {{ qlausscore}};
+    var gameresult = 0;
+
+
+
+    if (yourresult > qlausresult) {
+        gameresult = 1
+    }
+
+    if (yourresult < qlausresult) {
+        gameresult = 2;
+    }
+
+    var clock = new THREE.Clock();
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    var listener = new THREE.AudioListener();
+    camera.add(listener);
+
+    // create a global audio source
+    var sound = new THREE.Audio(listener);
+    var soundnumber = Math.floor(Math.random() * 3) + 1;
+    // load a sound and set it as the Audio object's buffer
+    var audioLoader = new THREE.AudioLoader();
+    audioLoader.load('/static/sounds/sound' + soundnumber + '.ogg', function (buffer) {
+        sound.setBuffer(buffer);
+        sound.setLoop(true);
+        sound.setVolume(0.5);
+        sound.play();
+    });
+
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    var leftSantaAnim;
+    var leftSantaTexture
+    //Left Santa
+
+    if (gameresult < 2) {
+        leftSantaTexture = new THREE.TextureLoader().load('/static/images/santa_attackLeft.png');
+        leftSantaAnim = new TextureAnimator(leftSantaTexture, 5, 1, 5, 105); // texture, #horiz, #vert, #total, duration.
+    }
+    else {
+        leftSantaTexture = new THREE.TextureLoader().load('/static/images/santa_hitLeft.png');
+    }
+
+
+    var leftSantaSpriteMaterial = new THREE.SpriteMaterial({ map: leftSantaTexture, color: 0xffffff });
+    var leftSantaSprite = new THREE.Sprite(leftSantaSpriteMaterial);
+    leftSantaSprite.position.x -= 0.7;
+
+    if (gameresult == 2) {
+        leftSantaSprite.position.y -= 0.2;
+        leftSantaSprite.scale.x = 1.8;
+        leftSantaSprite.scale.y = 1.8;
+
+    }
+    else {
+        leftSantaSprite.scale.x = 2;
+        leftSantaSprite.scale.y = 2;
+    }
+
+
+    scene.add(leftSantaSprite);
+
+    //Right Santa
+    var rightSantaTexture;
+    var rightSantaAnim;
+
+    if (gameresult == 0 || gameresult == 2) {
+        rightSantaTexture = new THREE.TextureLoader().load('/static/images/santa_attackRight.png');
+        rightSantaAnim = new TextureAnimator(rightSantaTexture, 5, 1, 5, 105); // texture, #horiz, #vert, #total, duration.
+    }
+    else {
+        rightSantaTexture = new THREE.TextureLoader().load('/static/images/santa_hitRight.png');
+    }
+
+    var rightSantaSpriteMaterial = new THREE.SpriteMaterial({ map: rightSantaTexture, color: 0xffffff });
+
+    var rightSantaSprite = new THREE.Sprite(rightSantaSpriteMaterial);
+    rightSantaSprite.position.x += 0.7;
+    if (gameresult == 1) {
+        rightSantaSprite.position.y -= 0.2;
+        rightSantaSprite.scale.x = 1.8;
+        rightSantaSprite.scale.y = 1.8;
+    }
+    else {
+        rightSantaSprite.scale.x = 2;
+        rightSantaSprite.scale.y = 2;
+    }
+
+    scene.add(rightSantaSprite);
+
+    //Header
+    var xmasbattleTexture = new THREE.TextureLoader().load('/static/images/gameover.png');
+    var xmasbattleSpriteMaterial = new THREE.SpriteMaterial({ map: xmasbattleTexture, color: 0xffffff });
+    var xmasbattleSprite = new THREE.Sprite(xmasbattleSpriteMaterial);
+    xmasbattleSprite.scale.x = 4;
+    xmasbattleSprite.scale.y = 4;
+    xmasbattleSprite.position.y += 0.8;
+    scene.add(xmasbattleSprite);
+
+
+    camera.position.z = 5;
+
+    var animate = function () {
+        requestAnimationFrame(animate);
+        var delta = clock.getDelta();
+
+        if (gameresult < 2) {
+            leftSantaAnim.update(1000 * delta);
+        }
+        if (gameresult == 0 || gameresult == 2) {
+            rightSantaAnim.update(1000 * delta);
+        }
+
+
+        renderer.render(scene, camera);
+    };
+
+    animate();
+</script>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="valign-wrapper" style="position:absolute;width:100%;height:100%;">
+    <div class="container" style="color:#66BB6A">
+        <div class="row">
+            <div class="col s12">
+                <div class="progress white" style="height:25px">
+                    <div class="determinate green lighten-1" id="progressdet" style="width:0%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <div id='secamount'>Time left: {{secamount}} sec</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <div id='secamount'>Max loading: {{maxweight}} kg</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <div id='yourresult' style="color:#FF425B"></div>
+            </div>
+        </div>
+
+        <div class="row" id="divGifts">
+
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <div id='qlauslabel' style="color:white; font-size:large"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/scripts/three.min.js"></script>
+<script src="/static/scripts/jquery-1.10.2.js"></script>
+<script>
+        var secamount = {{ secamount}};
+        var progpart = 100 / secamount;
+        var currProgressBar = 0;
+        var yourloading = 0;
+        var interval;
+        var giftsstring = '{{ gifts }}';
+        var gifts = giftsstring.split("|");
+
+        function Checked(giftnumber) {
+            if ($("#chk" + giftnumber).prop('checked')) {
+                yourloading += parseInt(gifts[giftnumber]);
+                $("#lbl" + giftnumber).attr('style', 'color:white');
+            }
+            else {
+                yourloading -= parseInt(gifts[giftnumber]);
+                $("#lbl" + giftnumber).attr('style', '');
+            }
+        }
+
+        $(document).ready(function () {
+            for (i = 0; i < gifts.length; i++)
+            {
+                var imagenumber = i + 1;
+                $("#divGifts").append("<div class='col l3 m4 s12'><label id='lbl" + i + "'><input id='chk" + i + "' type = 'checkbox' onchange='Checked(" + i + ")'/><span>" + gifts[i] + " kg</span></label><br/><img src='/static/images/Gift" + imagenumber + ".png' width='50%'/></div>")
+            }
+
+            interval = setInterval(function () {
+                secamount--;
+                $("#secamount").html("Time left: " + secamount + " sec");
+                currProgressBar += progpart;
+                $("#progressdet").attr('style', 'width:' + currProgressBar + '%');
+
+                if (secamount == 0) {
+                    $("#yourresult").html("Your loading: " + yourloading + " kg");
+
+                    $("#qlauslabel").html("Waiting for Santa Qlaus...");
+
+                    clearInterval(interval);
+
+                    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+                    var listener = new THREE.AudioListener();
+                    camera.add(listener);
+
+                    // create a global audio source
+                    var sound = new THREE.Audio(listener);
+                    var soundnumber = Math.floor(Math.random() * 3) + 1;
+                    // load a sound and set it as the Audio object's buffer
+                    var audioLoader = new THREE.AudioLoader();
+                    audioLoader.load('/static/sounds/timeup.ogg', function (buffer) {
+                        sound.setBuffer(buffer);
+                        sound.setLoop(true);
+                        sound.setVolume(0.5);
+                        sound.play();
+                    });
+
+
+                    for (i = 0; i < gifts.length; i++) {
+                        $("#chk" + i).prop("disabled", true);
+                    }
+
+                    setTimeout(function () {
+                        location.href = "/qlaus?yourresult=" + yourloading;
+                    },
+                        3000);
+                }
+
+            }, 1000);
+        });
+
+
+
+
+</script>
+
+    {% endblock %}

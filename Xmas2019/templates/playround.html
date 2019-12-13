@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="valign-wrapper" style="position:absolute;width:100%;height:100%;color:white">
+    <div class="row">
+        <div class="row">
+            <div class="col s12 center-align" style="font-size:large;">
+                ROUND {{roundnumber }} of 5
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align" style="color:#66BB6A">
+                Amount of gifts: {{giftamount}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align" style="color:#66BB6A">
+                Time: {{secamount}} sec
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align" style="color:#66BB6A">
+                Max loading: {{maxweight}} kg
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/scripts/three.min.js"></script>
+<script>
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    var listener = new THREE.AudioListener();
+    camera.add(listener);
+
+    // create a global audio source
+    var sound = new THREE.Audio(listener);
+    // load a sound and set it as the Audio object's buffer
+    var audioLoader = new THREE.AudioLoader();
+    audioLoader.load('/static/sounds/bells.ogg', function (buffer) {
+        sound.setBuffer(buffer);
+        sound.setLoop(true);
+        sound.setVolume(0.5);
+        sound.play();
+    });
+
+    setTimeout(function () {
+        location.href = "/play";
+    }, 3000);
+</script>
+
+{% endblock %}
