@@ -2,9 +2,10 @@
 
 {% block content %}
 
+<div id="mobile-indicator"></div>
 
-<div class="valign-wrapper" style="position:absolute;width:100%;height:100%;">
-    <div class="container" style="color:#66BB6A">
+<div class="valign-wrapper" id="divMain" style="position:absolute;width:100%;height:100%;color:#66BB6A">
+    <div class="container" >
         <div class="row">
             <div class="col s12">
                 <div class="progress white" style="height:25px">
@@ -62,11 +63,16 @@
             }
         }
 
-        $(document).ready(function () {
+    $(document).ready(function () {
+            if ($('#mobile-indicator').is(':visible')) {
+                $("#divMain").attr("style", "position:absolute;width:100%;color:#66BB6A")
+            }
+
+
             for (i = 0; i < gifts.length; i++)
             {
                 var imagenumber = i + 1;
-                $("#divGifts").append("<div class='col l3 m4 s12'><label id='lbl" + i + "'><input id='chk" + i + "' type = 'checkbox' onchange='Checked(" + i + ")'/><span>" + gifts[i] + " kg</span></label><br/><img src='/static/images/Gift" + imagenumber + ".png' width='50%'/></div>")
+                $("#divGifts").append("<div class='col l3 m4 s6 center-align'><label id='lbl" + i + "'><input id='chk" + i + "' type = 'checkbox' onchange='Checked(" + i + ")'/><span>" + gifts[i] + " kg</span></label><br/><img src='/static/images/Gift" + imagenumber + ".png' width='35%'/></div>")
             }
 
             interval = setInterval(function () {

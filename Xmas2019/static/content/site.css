@@ -3,3 +3,12 @@ body {
     font-family: 'Press Start 2P', cursive;
 }
 
+#mobile-indicator {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    #mobile-indicator {
+        display: block;
+    }
+}
