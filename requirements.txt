@@ -4,7 +4,7 @@ cffi==1.13.2
 chardet==3.0.4
 Click==7.0
 cryptography==2.8
-cvxopt==1.2.3
+cvxopt==1.2.7
 decorator==4.4.1
 dill==0.3.1.1
 dlx==1.0.4
