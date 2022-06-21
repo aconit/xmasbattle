@@ -31,7 +31,7 @@ ndg-httpsclient==0.5.1
 nest-asyncio==1.2.1
 networkx==2.4
 ntlm-auth==1.4.0
-numpy==1.17.4
+numpy==1.22.0
 pandas==0.25.3
 pip==18.1
 ply==3.11
